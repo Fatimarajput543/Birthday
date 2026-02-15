@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Important Question 😎</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ffb6c1, #ffd1dc);
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
+
+    .screen {
+      text-align: center;
+      background: #ffc0cb;
+      padding: 40px 50px;
+      border-radius: 25px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+      display: none;
+      position: relative;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    h1 {
+      color: #c2185b;
+      font-size: 2.4em;
+      margin-bottom: 25px;
+    }
+
+    button {
+      padding: 12px 30px;
+      margin: 10px;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.2s;
+      position: relative;
+    }
+
+    .yes {
+      background: #c2185b;
+      color: white;
+    }
+
+    .yes:hover {
+      transform: scale(1.1);
+    }
+
+    .no {
+      background: white;
+      color: #c2185b;
+      position: absolute;
+    }
+
+    /* 🎂 Cake */
+    .cake {
+      width: 120px;
+      height: 80px;
+      background: #6b3e26;
+      border-radius: 8px;
+      margin: 0 auto 15px;
+      position: relative;
+    }
+
+    .candle {
+      width: 8px;
+      height: 25px;
+      background: #fff;
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 4px;
+    }
+
+    .flame {
+      width: 12px;
+      height: 12px;
+      background: gold;
+      border-radius: 50%;
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: flicker 0.8s infinite alternate;
+    }
+
+    @keyframes flicker {
+      from { transform: translateX(-50%) scale(1); }
+      to { transform: translateX(-50%) scale(1.3); }
+    }
+
+    .confetti span {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: white;
+      animation: fall 4s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes fall {
+      from { transform: translateY(-100vh); }
+      to { transform: translateY(100vh); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🎶 Music -->
+  <audio id="music" loop>
+    <source src="Birthday song.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- ❓ Question Screen -->
+  <div class="screen active" id="question">
+    <h1>Are you my good friend? 🤔</h1>
+    <button class="yes" onclick="startSurprise()">YES 😄</button>
+    <button class="no" id="noBtn">NO 🙃</button>
+  </div>
+
+  <!-- 🎂 Birthday Screen -->
+  <div class="screen" id="card">
+    <div class="cake">
+      <div class="candle">
+        <div class="flame"></div>
+      </div>
+    </div>
+
+    <h1>
+      Happy Birthday 🎉<br>
+      <span id="friendName">My Dear Friend</span> 💙
+    </h1>
+  </div>
+
+  <div class="confetti">
+    <span style="left:10%; animation-delay:0s;"></span>
+    <span style="left:30%; animation-delay:1s;"></span>
+    <span style="left:50%; animation-delay:2s;"></span>
+    <span style="left:70%; animation-delay:1.5s;"></span>
+    <span style="left:90%; animation-delay:0.5s;"></span>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+
+    noBtn.addEventListener("mouseenter", () => {
+      const x = Math.random() * 200 - 100;
+      const y = Math.random() * 200 - 100;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    function startSurprise() {
+      let name = prompt("What's your name? 😎");
+      if (!name) name = "My Dear Friend";
+
+      document.getElementById("friendName").innerText = name;
+      document.getElementById("question").classList.remove("active");
+      document.getElementById("card").classList.add("active");
+      document.getElementById("music").play();
+    }
+  </script>
+
+</body>
+</html>
